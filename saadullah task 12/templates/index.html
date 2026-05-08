@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Data Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Laptop Specifications Explorer</h1>
+        <form action="/search" method="POST" class="search-form">
+            <input type="text" name="query" placeholder="Search by Company, CPU, RAM...">
+            <button type="submit">Search</button>
+            <a href="/" class="reset-btn">Reset</a>
+        </form>
+    </header>
+    <main>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Model</th>
+                        <th>CPU</th>
+                        <th>RAM (GB)</th>
+                        <th>Storage</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for laptop in laptops %}
+                    <tr>
+                        <td>{{ laptop['Company'] }}</td>
+                        <td>{{ laptop['TypeName'] }}</td>
+                        <td>{{ laptop['Cpu'] }}</td>
+                        <td>{{ laptop['Ram_GB'] }}</td>
+                        <td>{{ laptop['Total_Storage_GB'] }}GB {{ laptop['Storage_Type'] }}</td>
+                        <td class="price">${{ laptop['Price'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
